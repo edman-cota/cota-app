@@ -1,0 +1,44 @@
+
+.board-container {
+    background-color: #F5F9F9;
+    height: 100%;
+    width: 300px;
+    border-radius: 18px 18px 0px 0px;
+    margin: 0px 16px;
+
+    .board__title-container {
+        margin: auto;
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 20px;
+
+        .board__title-count {
+            background-color: #e9f3f2;
+            padding: 2px 8px;
+            color: #6CB7A9;
+            border-radius: 5px;
+        }
+    }
+
+    .board__add-container {
+        display: flex;
+        justify-content: center;
+
+        button {
+            width: 90%;
+            height: 40px;
+            background-color: #E8F1F0;
+            border: none;
+            outline: none;
+            color: #6CB7A9;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 7px;
+            
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
