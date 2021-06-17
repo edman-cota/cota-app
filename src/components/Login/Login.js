@@ -19,7 +19,7 @@ function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/web/view=board")
+      history.push("/web/view=tree")
     } catch {
       setError("Failed to sign in")
     }
