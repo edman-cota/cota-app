@@ -1,28 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import './navbar.scss';
-import { Link, useHistory } from 'react-router-dom';
-import Profile from '../../assets/profile.png';
-import { useAuth } from '../../contexts/AuthContext';
+import React, { useState } from "react";
+import "./navbar.scss";
+import { Link, useHistory } from "react-router-dom";
+import Profile from "../../assets/profile.png";
+import { useAuth } from "../../contexts/AuthContext";
+import { FormattedMessage } from "react-intl";
 
 // MATERIAL DESIGN UI
-import Tooltip from '@material-ui/core/Tooltip';
+import Tooltip from "@material-ui/core/Tooltip";
 
 function Navbar(props) {
   return (
-    <nav className="navbar">
-      <ul className="navbar-nav">
+    <div className="main-navbar">
+      <ul className="ul-navbar-nav">
         <NavItemMoon />
         <NavItemNotification />
 
         <NavItem>
-            <DropdownMenu></DropdownMenu>
+          <DropdownMenu></DropdownMenu>
         </NavItem>
       </ul>
-    </nav>
+    </div>
   );
 }
-  
+
 function NavItem(props) {
   const [open, setOpen] = useState(false);
 
@@ -43,9 +44,13 @@ function NavItemNotification(props) {
   return (
     <li className="nav-item">
       <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-          <Tooltip title="Notifications" placement="bottom" arrow>
-            <i className="uil uil-bell"></i>
-          </Tooltip>
+        <Tooltip
+          title={<FormattedMessage id="notifications"></FormattedMessage>}
+          placement="bottom"
+          arrow
+        >
+          <i className="uil uil-bell"></i>
+        </Tooltip>
       </a>
 
       {open && props.children}
@@ -59,7 +64,11 @@ function NavItemMoon(props) {
   return (
     <li className="nav-item">
       <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-        <Tooltip title="Dark Mode" placement="bottom" arrow>
+        <Tooltip
+          title={<FormattedMessage id="dark_mode"></FormattedMessage>}
+          placement="bottom"
+          arrow
+        >
           <i className="uil uil-moon"></i>
         </Tooltip>
       </a>
@@ -68,20 +77,19 @@ function NavItemMoon(props) {
     </li>
   );
 }
-  
-function DropdownMenu() {
 
-  const [error, setError] = useState('');
+function DropdownMenu() {
+  const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
 
   async function handleLogout() {
-    setError('');
+    setError("");
     try {
-        await logout();
-        history.push('/login');
+      await logout();
+      history.push("/login");
     } catch {
-        setError('Fail to logout');
+      setError("Fail to logout");
     }
   }
 
@@ -106,30 +114,30 @@ function DropdownMenu() {
       <div className="menu">
         <DropdownItem goTo="/profile">
           <i className="uil uil-user"></i>
-          My Profile
+          <FormattedMessage id="my_profile"></FormattedMessage>
         </DropdownItem>
         <DropdownItem goTo="/settings">
           <i className="uil uil-setting"></i>
-          Account Settings
+          <FormattedMessage id="account_settings"></FormattedMessage>
         </DropdownItem>
         <DropdownItem goTo="/help-center">
           <i className="uil uil-question-circle"></i>
-          Help
+          <FormattedMessage id="help"></FormattedMessage>
         </DropdownItem>
         <DropdownItem goTo="/pro">
           <i className="uil uil-shield-exclamation"></i>
-          Go Pro
+          <FormattedMessage id="go_pro"></FormattedMessage>
         </DropdownItem>
         <div className="horizontal-divider">
-          <hr/>
+          <hr />
         </div>
         <DropdownItemLogout>
           <i className="uil uil-signout"></i>
-          Log out
+          <FormattedMessage id="log_out"></FormattedMessage>
         </DropdownItemLogout>
       </div>
     </div>
   );
 }
 
-  export default Navbar;
+export default Navbar;
