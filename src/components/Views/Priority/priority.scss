@@ -1,0 +1,134 @@
+@import "../../../components/variables.scss";
+
+.dropdown {
+  .uil-arrow-up {
+    color: rgba(0, 0, 0, 0.42);
+    font-size: 24px;
+  }
+
+  .show {
+    #priority-dropdown-button {
+      &:active {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+      &:focus {
+        background-color: #ededed;
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+
+  #priority-dropdown-button {
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 6px 6px;
+    // background-color: green !important;
+
+    &::after {
+      display: none !important;
+    }
+    &:active {
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    &:focus {
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .dropdown-menu {
+    border: 1px solid #ededed;
+    border-radius: 8px;
+    min-width: 8.5rem;
+    -webkit-box-shadow: -1px 2px 13px 0 rgb(0 0 0 / 10%);
+    -moz-box-shadow: -1px 2px 13px 0 rgb(0 0 0 / 10%);
+    box-shadow: -1px 2px 13px 0 rgb(0 0 0 / 10%);
+
+    .dropdown-item {
+      color: #6e6d7a;
+      padding: 0.45rem 0.25rem 0.45rem 0.25rem;
+
+      &:hover {
+        color: #0d0c22;
+      }
+      &:active {
+        background-color: $secondaryHoverBackground;
+      }
+
+      .uil {
+        padding: 0px 10px;
+        font-size: 17px;
+      }
+
+      .priority-low {
+        visibility: visible !important;
+        cursor: pointer;
+        padding: 4px 8px;
+        width: 40px;
+        line-height: 24px;
+        text-align: center;
+        overflow: hidden;
+        box-sizing: border-box;
+        height: 30px;
+        word-break: break-all;
+        font-style: normal;
+        margin-left: 4px;
+        font-size: 16px;
+        color: $lowPriorityColor;
+
+        &:hover {
+          color: $lowPriorityColor !important;
+        }
+      }
+      .priority-medium {
+        visibility: visible !important;
+        cursor: pointer;
+        padding: 4px 8px;
+        width: 40px;
+        line-height: 24px;
+        text-align: center;
+        overflow: hidden;
+        box-sizing: border-box;
+        height: 30px;
+        word-break: break-all;
+        font-style: normal;
+        margin-left: 4px;
+        font-size: 16px;
+        color: $mediumPriorityColor;
+
+        &:hover {
+          color: $mediumPriorityColor !important;
+        }
+      }
+      .priority-high {
+        visibility: visible !important;
+        cursor: pointer;
+        padding: 4px 8px;
+        width: 40px;
+        line-height: 24px;
+        text-align: center;
+        overflow: hidden;
+        box-sizing: border-box;
+        height: 30px;
+        word-break: break-all;
+        font-style: normal;
+        margin-left: 4px;
+        font-size: 16px;
+        color: $highPriorityColor;
+
+        &:hover {
+          color: $highPriorityColor !important;
+        }
+      }
+    }
+  }
+}

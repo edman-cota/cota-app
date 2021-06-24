@@ -9,6 +9,9 @@ import { FormattedMessage } from "react-intl";
 
 import Task from "./Task";
 import NewTask from "./NewTask/NewTask";
+import Priority from "../Priority/Priority";
+import Item from "../Item/Item";
+import ItemCompleted from "../Item/ItemCompleted";
 
 // MATERIAL DESIGN UI
 import Tooltip from "@material-ui/core/Tooltip";
@@ -22,13 +25,15 @@ class List extends React.Component {
     this.state = {
       tasksList: [],
       projectsList: [],
+      completedTasks: [],
       currentProjectTitle: "jojo",
       filter: 0,
-      showCompleted: true,
+      showCompleted: false,
       showAddTask: false,
     };
   }
 
+  // RETRIEVE PROJECT
   componentDidMount() {
     firebase
       .database()
@@ -39,6 +44,7 @@ class List extends React.Component {
           if (snap.val().name === "Inbox") {
             projectList.push(snap.val());
             this.setState({ projectsList: projectList });
+            this.setState({ showCompleted: snap.val().show_completed });
           }
         });
       });
@@ -49,12 +55,29 @@ class List extends React.Component {
       .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/tasks")
       .on("value", (snapshot) => {
         let taskList = [];
+        let completedTask = [];
         snapshot.forEach((snap) => {
-          taskList.push(snap.val());
+          if (snap.val().completed === 0) {
+            taskList.push(snap.val());
+          }
+          if (snap.val().completed === 1) {
+            completedTask.push(snap.val());
+          }
         });
         this.setState({ tasksList: taskList });
+        this.setState({ completedTasks: completedTask });
       });
   }
+
+  hideShowCompleted(props) {
+    firebase
+      .database()
+      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/Projects")
+      .child(props[0])
+      .update({ show_completed: props[1] });
+  }
+
+  clearCompleted() {}
 
   render() {
     return (
@@ -132,7 +155,14 @@ class List extends React.Component {
                     {this.state.projectsList.map((data) => {
                       return (
                         <>
-                          <Dropdown.Item href="#/action-1">
+                          <Dropdown.Item
+                            onClick={() =>
+                              this.hideShowCompleted([
+                                data.id,
+                                !data.show_completed,
+                              ])
+                            }
+                          >
                             <i className="uil uil-share-alt"></i>
                             {data.show_completed ? (
                               <FormattedMessage id="hide_completed"></FormattedMessage>
@@ -140,7 +170,7 @@ class List extends React.Component {
                               <FormattedMessage id="show_completed"></FormattedMessage>
                             )}
                           </Dropdown.Item>
-                          <Dropdown.Item href="#/action-2">
+                          <Dropdown.Item>
                             <i className="uil uil-copy-alt"></i>
                             <FormattedMessage id="clear_completed"></FormattedMessage>
                           </Dropdown.Item>
@@ -164,6 +194,19 @@ class List extends React.Component {
                 />
               );
             })}
+            {this.state.completedTasks.map((data) => {
+              if (this.state.showCompleted) {
+                return (
+                  <ItemCompleted
+                    taskId={data.id}
+                    completed={data.completed}
+                    taskName={data.content}
+                    dueDate={data.due}
+                    priority={data.priority}
+                  />
+                );
+              }
+            })}
             <NewTask showAddTask={this.state.showAddTask} />
           </ul>
         </div>
@@ -171,235 +214,6 @@ class List extends React.Component {
       </div>
     );
   }
-}
-
-function Item(props) {
-  return (
-    <li className="tree-item">
-      <div className="tree-row">
-        <div className="tree-row-front">
-          <RenderStatus taskId={props.taskId} completed={props.completed} />
-        </div>
-        <div className="tree-row-content">
-          <div className="task-menu-bar">
-            <Tooltip
-              title={<FormattedMessage id="tag"></FormattedMessage>}
-              placement="bottom"
-              arrow
-            >
-              <i className="uil uil-pricetag-alt"></i>
-            </Tooltip>
-            {props.dueDate ? (
-              <RenderDate due={props.dueDate} />
-            ) : (
-              <Tooltip
-                title={<FormattedMessage id="date"></FormattedMessage>}
-                placement="bottom"
-                arrow
-              >
-                <i className="uil uil-schedule"></i>
-              </Tooltip>
-            )}
-            <RenderPriority taskId={props.taskId} priority={props.priority} />
-          </div>
-          <div className="task-name-wrapper">
-            <div className="task-name-frame">
-              <div className="task-name-frame-border">
-                <span className="task-name">{props.taskName}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-  );
-}
-
-function RenderStatus(props) {
-  const switchTaskStatus = (prop) => {
-    console.log(prop);
-    firebase
-      .database()
-      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/tasks")
-      .child(prop)
-      .update({ completed: 1 });
-  };
-
-  const uncompleteTaskStatus = (propb) => {
-    console.log(propb);
-    firebase
-      .database()
-      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/tasks")
-      .child(propb)
-      .update({ completed: 0 });
-  };
-
-  switch (props.completed) {
-    case 0:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="complete"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-circle"
-            onClick={() => switchTaskStatus(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-    case 1:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="completed"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-check-circle"
-            onClick={() => uncompleteTaskStatus(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-    default:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="complete"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-circle"
-            onclick={() => switchTaskStatus(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-  }
-}
-
-function RenderPriority(props) {
-  const addPriority = (prop) => {
-    console.log(prop);
-    firebase
-      .database()
-      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/tasks")
-      .child(prop)
-      .update({ priority: 2 });
-  };
-
-  switch (props.priority) {
-    case 0: // None
-      return (
-        <Tooltip
-          title={<FormattedMessage id="priority"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-arrow-up"
-            onClick={() => addPriority(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-    case 1: // None
-      return (
-        <Tooltip
-          title={<FormattedMessage id="priority"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-arrow-up"
-            onClick={() => addPriority(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-    case 2: // Low
-      return (
-        <Tooltip
-          title={<FormattedMessage id="low"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i className="uil uil-arrow-up priority-low"></i>
-        </Tooltip>
-      );
-    case 3: // Medium
-      return (
-        <Tooltip
-          title={<FormattedMessage id="medium"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i className="uil uil-arrow-up priority-medium"></i>
-        </Tooltip>
-      );
-    case 4:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="high"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i className="uil uil-arrow-up priority-high"></i>
-        </Tooltip>
-      );
-    default:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="priority"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i className="uil uil-arrow-up"></i>
-        </Tooltip>
-      );
-  }
-}
-
-function RenderDate(props) {
-  var todayDate = new Date().setHours(0, 0, 0, 0);
-  var dateSaved = new Date(parseInt(props.due)).setHours(0, 0, 0, 0);
-
-  if (todayDate - dateSaved === 86400000) {
-    return (
-      <p className="uil-schedule-text-yesterday">
-        <FormattedMessage id="yesterday"></FormattedMessage>
-      </p>
-    );
-  }
-
-  if (todayDate - dateSaved > 86400000) {
-    return (
-      <p className="uil-schedule-text-yesterday">
-        {" "}
-        {moment.unix(props.due / 1000).format("MMM DD")}{" "}
-      </p>
-    );
-  }
-
-  if (todayDate === dateSaved) {
-    return (
-      <p className="uil-schedule-text-today">
-        <FormattedMessage id="today"></FormattedMessage>
-      </p>
-    );
-  }
-
-  if (dateSaved - todayDate === 86400000) {
-    return (
-      <p className="uil-schedule-text-tomorrow">
-        <FormattedMessage id="tomorrow"></FormattedMessage>
-      </p>
-    );
-  }
-
-  return (
-    <p className="uil-schedule-text">
-      {" "}
-      {moment.unix(props.due / 1000).format("MMM DD")}{" "}
-    </p>
-  );
 }
 
 export default List;

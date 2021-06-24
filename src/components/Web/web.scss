@@ -1,61 +1,56 @@
 @import "../variables.scss";
 
 .main-web-container {
-    display: flex;
+  display: flex;
 }
 
 .content-container {
-    background-color: $primaryBackground;
-    height: 100vh;
+  background-color: $primaryBackground;
+  height: 100vh;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  .switch-view-container {
     display: flex;
-    width: 100%;
-    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 40px;
 
-    .switch-view-container {
-        display: flex;
-        justify-content: flex-end;
-        padding: 10px 40px;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
 
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
+      .i-item {
+        padding: 5px 6px;
+        margin: 0px 5px;
+      }
 
-            .i-item {
-                padding: 5px 6px;
-                margin: 0px 5px;
-            }
+      .i-item.active {
+        background-color: #f4faec;
+        border-radius: 5px;
+        color: #9ac656 !important;
+      }
 
-            .i-item.active {
-                background-color: #f4faec;
-                border-radius: 5px;
-                color: #9ac656 !important;
-            }
-
-            .i-item.active .uil {
-                color: #9ac656 !important;
-            }
-          }
-
-        .uil {
-            color: rgba(0,0,0,0.58);
-            font-size: 16px;
-
-            &:hover {
-                color: black;
-            }
-        }
+      .i-item.active .uil {
+        color: #9ac656 !important;
+      }
     }
+
+    .uil {
+      color: rgba(0, 0, 0, 0.58);
+      font-size: 16px;
+
+      &:hover {
+        color: black;
+      }
+    }
+  }
 }
 
-
-
-
-
-
-
-
-
-
-
+@media screen and (max-width: 1255px) {
+  .sidebar {
+    width: 0% !important;
+  }
+}
