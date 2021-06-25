@@ -145,7 +145,7 @@ img {
 }
 
 /*==================== BUTTONS ====================*/
-.button {
+.get-started-button {
   display: inline-block;
   background-color: $firstColor;
   color: #fff;
@@ -155,6 +155,8 @@ img {
 
   &:hover {
     background-color: $firstColorAlt;
+    color: white;
+    text-decoration: none;
   }
 }
 
@@ -263,9 +265,9 @@ img {
   .main {
     padding: 0 !important;
   }
-  .nav__menu {
-    height: 20px !important;
-  }
+  // .nav__menu {
+  //   height: 20px !important;
+  // }
   .home__blob {
     width: 320px !important;
   }

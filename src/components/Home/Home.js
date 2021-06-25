@@ -1,7 +1,7 @@
 import React from "react";
 import "./home.scss";
 import { Link } from "react-router-dom";
-import { Header } from "../Header/Header";
+import { Header } from "./Header/Header";
 import { About } from "../About/About";
 import { Skills } from "../Skills/Skills";
 import { Qualification } from "../Qualification/Qualification";
@@ -74,13 +74,14 @@ export const Main = () => {
               <div className="home__data">
                 <h1 className="home__title">Simplify your day</h1>
                 <h3 className="home__subtitle">Simple to-do list</h3>
+                <br />
                 <p className="home__description">
-                  High level experience in web design and knowledge, producing
-                  quality work.
+                  Manage your daily tasks and keep productivity in a simple and
+                  easy way.
                 </p>
-                <a href="#contact" className="button button--flex">
+                <Link to="/signup" className="get-started-button button--flex">
                   Get Started <i className="uil uil-message button__icon"></i>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="home__scroll">

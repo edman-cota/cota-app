@@ -5,10 +5,18 @@ import { FormattedMessage } from "react-intl";
 // REACT BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
 
-class Task extends React.Component {
-  render() {
-    return (
-      <div className="task-container">
+const Task = (props) => {
+  console.log("hifhoasdifhsdf");
+
+  return (
+    <div className="task-container">
+      <div className="task-empty-container">
+        <div className="task-empty-frame">
+          <i className="uil uil-left-indent"></i>
+          <p>Click a task for it's detail</p>
+        </div>
+      </div>
+      <div className="task-detail-container">
         <div className="task-settings-container">
           <ul>
             <li>
@@ -43,7 +51,7 @@ class Task extends React.Component {
           </ul>
         </div>
         <div className="task-name-container">
-          <p>Add circle icon at the beginning</p>
+          <p>{props.taskId}</p>
         </div>
         <div className="primary-options-container">
           <div className="complete-container"></div>
@@ -85,8 +93,8 @@ class Task extends React.Component {
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Task;

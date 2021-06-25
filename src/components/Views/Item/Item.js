@@ -1,20 +1,23 @@
 import React from "react";
 import moment from "moment";
-import firebase from "firebase/app";
 import "firebase/database";
 import { FormattedMessage } from "react-intl";
 
 import Priority from "../Priority/Priority";
+import RenderStatus from "./RenderStatus";
+import Task from "../Tree/Task";
 
 // MATERIAL DESIGN UI
 import Tooltip from "@material-ui/core/Tooltip";
 
-// REACT BOOTSTRAP
-import Dropdown from "react-bootstrap/Dropdown";
-
 const Item = (props) => {
+  const callTask = (prop) => {
+    console.log(prop);
+    <Task taskId={prop} />;
+  };
+
   return (
-    <li className="tree-item">
+    <li className="tree-item" onClick={() => callTask(props.taskId)}>
       <div className="tree-row">
         <div className="tree-row-front">
           <RenderStatus taskId={props.taskId} completed={props.completed} />
@@ -54,68 +57,6 @@ const Item = (props) => {
     </li>
   );
 };
-
-function RenderStatus(props) {
-  const switchTaskStatus = (prop) => {
-    console.log(prop);
-    firebase
-      .database()
-      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/tasks")
-      .child(prop)
-      .update({ completed: 1 });
-  };
-
-  const uncompleteTaskStatus = (propb) => {
-    console.log(propb);
-    firebase
-      .database()
-      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/tasks")
-      .child(propb)
-      .update({ completed: 0 });
-  };
-
-  switch (props.completed) {
-    case 0:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="complete"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-circle"
-            onClick={() => switchTaskStatus(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-    case 1:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="completed"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-check-circle"
-            onClick={() => uncompleteTaskStatus(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-    default:
-      return (
-        <Tooltip
-          title={<FormattedMessage id="complete"></FormattedMessage>}
-          placement="bottom"
-          arrow
-        >
-          <i
-            className="uil uil-circle"
-            onclick={() => switchTaskStatus(props.taskId)}
-          ></i>
-        </Tooltip>
-      );
-  }
-}
 
 function RenderDate(props) {
   var todayDate = new Date().setHours(0, 0, 0, 0);

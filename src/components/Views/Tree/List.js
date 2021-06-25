@@ -194,6 +194,9 @@ class List extends React.Component {
                 />
               );
             })}
+            <NewTask showAddTask={this.state.showAddTask} />
+          </ul>
+          <ul className="completed-tree-list">
             {this.state.completedTasks.map((data) => {
               if (this.state.showCompleted) {
                 return (
@@ -207,7 +210,6 @@ class List extends React.Component {
                 );
               }
             })}
-            <NewTask showAddTask={this.state.showAddTask} />
           </ul>
         </div>
         <Task />

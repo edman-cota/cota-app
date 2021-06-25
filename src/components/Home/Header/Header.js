@@ -17,16 +17,6 @@ export const Header = () => {
         </Link>
         <div className={`nav__menu ${show ? "show-menu" : ""} `} id="nav-menu">
           <ul className="nav__list grid">
-            {/* <li className="nav__item">
-              <a onClick={handleCloseMenu} href="#home" className="nav__link">
-                <i className="uil uil-estate nav__icon"></i> Home
-              </a>
-            </li>
-            <li className="nav__item">
-              <a onClick={handleCloseMenu} href="#about" className="nav__link">
-                <i className="uil uil-user nav__icon"></i> About
-              </a>
-            </li> */}
             <li className="nav__item">
               <Link
                 to="/help-center"
@@ -52,7 +42,7 @@ export const Header = () => {
                 to="/login"
                 onClick={handleCloseMenu}
                 href="#portafolio"
-                className="nav__link"
+                className="nav__link nav__link_login"
               >
                 <i className="uil uil-scenery nav__icon"></i> Login
               </Link>
@@ -62,7 +52,7 @@ export const Header = () => {
                 to="/signup"
                 onClick={handleCloseMenu}
                 href="#contact"
-                className="nav__link"
+                className="nav__link nav__link__signup"
               >
                 <i className="uil uil-message nav__icon"></i> Sing Up
               </Link>
