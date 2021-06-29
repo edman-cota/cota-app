@@ -3,10 +3,11 @@
 .task-container {
   // height: calc(100vh - 100px);
   width: 43%;
-  border: 1px solid $secondaryBorderColor;
+  border-left: 1px solid $secondaryBorderColor;
 
   .task-empty-container {
     // background-color: red;
+    display: none !important;
     height: 100%;
     width: 100%;
 
@@ -21,7 +22,6 @@
       .uil-left-indent {
         margin-top: -200px !important;
         font-size: 120px;
-        // margin: auto;
         color: #7c7b7b !important;
       }
 
@@ -34,8 +34,8 @@
   }
 
   .task-detail-container {
-    background-color: green;
-    display: none;
+    height: 100%;
+    width: 100%;
 
     .task-settings-container {
       height: 40px;

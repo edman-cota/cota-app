@@ -4,6 +4,8 @@ export const messages = {
   [LOCALES.ENGLISH]: {
     new_task: "Add new task",
     date_reminder: "Date & Reminder",
+    // SIDEBAR COMPONENT
+    projects: "Projects",
     // LIST COMPONENT
     custom: "Custom",
     priority: "Priority",
@@ -50,6 +52,8 @@ export const messages = {
   [LOCALES.SPANISH]: {
     new_task: "Agregar nueva tarea",
     date_reminder: "Fecha & Recordatorio",
+    // SIDEBAR COMPONENT
+    projects: "Proyectos",
     // LIST COMPONENT
     custom: "Personalizado",
     priority: "Prioridad",

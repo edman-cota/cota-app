@@ -1,12 +1,9 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import firebase from "firebase/app";
 import "firebase/database";
 import "./priority.scss";
 // MATERIAL DESIGN UI
 import Tooltip from "@material-ui/core/Tooltip";
-// REACT BOOTSTRAP
-import Dropdown from "react-bootstrap/Dropdown";
 
 const Priority = (props) => {
   const addPriority = (prop) => {

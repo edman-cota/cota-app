@@ -1,3 +1,94 @@
-.task-name-completed {
-  color: #7c7b7b;
+@import "../../../components/variables.scss";
+
+.tree-item {
+  position: relative;
+  padding-top: 38px;
+
+  .tree-row {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 38px;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+    border: 1px solid #f8f8f8;
+    border-width: 1px 0;
+
+    &:hover {
+      background-color: $secondaryHoverBackground;
+    }
+
+    .tree-row-front {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 10px;
+
+      .uil-check-circle {
+        padding: 0px 4px;
+        font-size: 21px;
+        color: green;
+
+        &:hover {
+          color: green;
+        }
+      }
+    }
+    .tree-row-content {
+      overflow: hidden;
+      flex: 1;
+
+      .task-menu-bar {
+        display: flex;
+        height: 100%;
+        cursor: pointer;
+        padding-top: 1px;
+        white-space: nowrap;
+        float: right !important;
+        justify-content: center;
+      }
+
+      .task-name-wrapper {
+        padding: 2px 0px;
+        height: 100%;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+
+        .task-name-frame {
+          padding: 0px 10px 0px 5px;
+          display: inline-block;
+          position: relative;
+          width: 100%;
+          color: rgba(0, 0, 0, 0.9);
+          // max-width: 100%;
+          // min-width: 32px;
+          height: 100%;
+          border: 1px solid transparent;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: 27px;
+
+          .task-name-frame-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid transparent;
+            pointer-events: none;
+
+            .task-name-completed {
+              line-height: 24px;
+              color: #7c7b7b;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

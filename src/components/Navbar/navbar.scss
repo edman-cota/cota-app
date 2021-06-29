@@ -1,9 +1,12 @@
+@import "../variables.scss";
+
 .main-navbar {
-  height: 100px;
+  height: 90px !important;
   width: 100%;
   display: flex !important;
   justify-content: flex-end !important;
   padding: 0px 40px;
+  border: 1px solid $secondaryBorderColor;
 
   ul {
     list-style: none;

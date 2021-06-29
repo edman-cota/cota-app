@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./task.scss";
+import moment from "moment";
 import { FormattedMessage } from "react-intl";
+import firebase from "firebase/app";
+import "firebase/database";
+import { useAuth } from "../../../contexts/AuthContext";
+import Priority from "../Priority/Priority";
 
 // REACT BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
 
 const Task = (props) => {
-  console.log("hifhoasdifhsdf");
+  const { currentUser } = useAuth();
+  const [currentTask, setCurrentTask] = useState([]);
+  const [currentTaskId, setCurrentTaskId] = useState("-McgmHdNuHhjlgvIaCAt");
+
+  useEffect(() => {
+    console.log("use effect");
+    firebase
+      .database()
+      .ref(currentUser.uid + "/tasks/" + currentTaskId)
+      .on("value", (snapshot) => {
+        let taskList = [];
+        snapshot.forEach((snap) => {
+          // console.log(snap.val());
+          taskList.push(snap.val());
+        });
+        setCurrentTask({ currentTask: taskList });
+      });
+  }, []);
 
   return (
     <div className="task-container">
@@ -51,20 +73,25 @@ const Task = (props) => {
           </ul>
         </div>
         <div className="task-name-container">
-          <p>{props.taskId}</p>
+          {/* <p>{currentTask.currentTask[1]}</p> */}
         </div>
         <div className="primary-options-container">
           <div className="complete-container"></div>
           <div className="calendar-container">
             <div className="calendar-frame">
               <i className="uil uil-schedule"></i>
-              <p>
+              {/* <RenderDate due={currentTask.currentTask[4]} /> */}
+              {/* <p>
                 <FormattedMessage id="date_reminder"></FormattedMessage>
-              </p>
+              </p> */}
             </div>
           </div>
           <div className="priority-container">
             <div className="priority-frame">
+              {/* <Priority
+                taskId={currentTask.currentTask[5]}
+                priority={currentTask.currentTask[6]}
+              /> */}
               <Dropdown>
                 <Dropdown.Toggle variant="link" id="priority-dropdown-basic">
                   <i className="uil uil-arrow-up"></i>
@@ -96,5 +123,50 @@ const Task = (props) => {
     </div>
   );
 };
+
+function RenderDate(props) {
+  var todayDate = new Date().setHours(0, 0, 0, 0);
+  var dateSaved = new Date(parseInt(props.due)).setHours(0, 0, 0, 0);
+
+  if (todayDate - dateSaved === 86400000) {
+    return (
+      <p className="uil-schedule-text-yesterday">
+        <FormattedMessage id="yesterday"></FormattedMessage>
+      </p>
+    );
+  }
+
+  if (todayDate - dateSaved > 86400000) {
+    return (
+      <p className="uil-schedule-text-yesterday">
+        {" "}
+        {moment.unix(props.due / 1000).format("MMM DD")}{" "}
+      </p>
+    );
+  }
+
+  if (todayDate === dateSaved) {
+    return (
+      <p className="uil-schedule-text-today">
+        <FormattedMessage id="today"></FormattedMessage>
+      </p>
+    );
+  }
+
+  if (dateSaved - todayDate === 86400000) {
+    return (
+      <p className="uil-schedule-text-tomorrow">
+        <FormattedMessage id="tomorrow"></FormattedMessage>
+      </p>
+    );
+  }
+
+  return (
+    <p className="uil-schedule-text">
+      {" "}
+      {moment.unix(props.due / 1000).format("MMM DD")}{" "}
+    </p>
+  );
+}
 
 export default Task;

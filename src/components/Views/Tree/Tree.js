@@ -16,7 +16,7 @@ export default function Tree() {
       <Sidebar />
       <div className="content-container">
         <Navbar></Navbar>
-        <div className="switch-view-container">
+        {/* <div className="switch-view-container">
           <ul>
             <li className="i-item active">
               <Tooltip
@@ -52,7 +52,7 @@ export default function Tree() {
               </Tooltip>
             </li>
           </ul>
-        </div>
+        </div> */}
         <List />
       </div>
     </div>

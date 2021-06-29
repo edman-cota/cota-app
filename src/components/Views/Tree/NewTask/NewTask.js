@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "./new-task.scss";
 import firebase from "firebase/app";
 import "firebase/database";
+import { Input } from "react-bootstrap";
+import Dropdown from "react-bootstrap/Dropdown";
+import { FormattedMessage } from "react-intl";
 
 import { useAuth } from "../../../../contexts/AuthContext";
 
@@ -69,6 +72,53 @@ function NewTask(props) {
           value={userState.task}
           autoFocus
         />
+        <Dropdown>
+          <Dropdown.Toggle variant="link" id="new-date-dropdown-button">
+            <i className="uil uil-calender"></i>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">
+              <i className="uil uil-align-center-alt"></i>
+              <FormattedMessage id="custom"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              <i className="uil uil-arrow-up"></i>
+              <FormattedMessage id="priority"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              <i className="uil uil-calender"></i>
+              <FormattedMessage id="date"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              <i className="uil uil-font"></i>
+              <FormattedMessage id="title"></FormattedMessage>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="link" id="add-priority-dropdown-button">
+            <i className="uil uil-arrow-up"></i>
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">
+              <i className="uil uil-align-center-alt"></i>
+              <FormattedMessage id="custom"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-2">
+              <i className="uil uil-arrow-up"></i>
+              <FormattedMessage id="priority"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              <i className="uil uil-calender"></i>
+              <FormattedMessage id="date"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item href="#/action-3">
+              <i className="uil uil-font"></i>
+              <FormattedMessage id="title"></FormattedMessage>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </form>
     </li>
   );

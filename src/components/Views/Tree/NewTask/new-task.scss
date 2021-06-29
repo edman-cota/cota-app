@@ -1,33 +1,106 @@
-@import '../../../variables.scss';
+@import "../../../variables.scss";
 
 .show-add-task-item {
-    visibility: visible !important;
+  visibility: visible !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px !important;
+  background-color: #f4faec !important;
+
+  .add-task-form {
+    width: 90%;
+    height: 36px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 40px !important;
-    background-color: #f4faec !important;
+    background-color: white !important;
+    border-radius: 6px;
+    border: 1px solid $secondaryBorderColor;
 
-    .add-task-form {
-        width: 90%;
-        height: 36px;
+    .add-task-input {
+      width: 85%;
+      height: 36px;
+      //   border: 1px solid $secondaryBorderColor;
+      border: none !important;
+      border-radius: 6px;
+      padding-left: 12px;
+      font-size: 15px;
 
-        .add-task-input {
-            width: 100%;
-            height: 36px;
-            border: 1px solid $secondaryBorderColor;
-            border-radius: 6px;
-            padding-left: 12px;
-            font-size: 15px;
-
-            &:focus {
-                border: 1px solid $secondaryBorderColor !important;
-                outline: none;
-            }
-        }
+      &:focus {
+        // border: 1px solid $secondaryBorderColor !important;
+        outline: none;
+      }
     }
+
+    .uil-calender {
+      color: rgba(0, 0, 0, 0.42) !important;
+      //   font-size: 18px;
+    }
+    .uil-arrow-up {
+      color: rgba(0, 0, 0, 0.42) !important;
+      font-size: 16px;
+    }
+
+    #new-date-dropdown-button {
+      //   background-color: #ededed;
+      background-color: #f7f7f9;
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      height: 30px;
+      padding: 6px 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      margin-right: 16px;
+
+      &::after {
+        display: none !important;
+      }
+      &:active {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      &:focus {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+
+    #add-priority-dropdown-button {
+      //   background-color: #ededed;
+      background-color: #f7f7f9;
+      outline: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      height: 30px;
+      padding: 6px 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 6px;
+      margin-right: 16px;
+
+      &::after {
+        display: none !important;
+      }
+      &:active {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      &:focus {
+        outline: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
 }
 
 .add-task-item {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }

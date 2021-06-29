@@ -3,12 +3,11 @@
 .list-view-container {
   width: 100%;
   height: calc(100vh - 100px);
-  margin: auto;
+  // margin: auto;
   display: flex;
-  // background-color: green;
+  margin: 0;
 
   .list-container {
-    // height: calc(100vh - 100px);
     width: 57%;
 
     .tree-list {
@@ -20,14 +19,14 @@
 
       .tree-item {
         position: relative;
-        padding-top: 38px;
+        padding-top: 38px !important;
 
         .tree-row {
           position: absolute;
           top: 0;
           left: 0;
           box-sizing: border-box;
-          height: 38px;
+          height: 38px !important;
           width: 100%;
           display: flex;
           z-index: 1;
@@ -300,6 +299,39 @@
           }
         }
       }
+    }
+
+    .completed-title {
+      color: #7c7b7b;
+      width: 95%;
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-top: 15px;
+      padding-bottom: 20px;
+      // background-color: green;
+    }
+
+    .completed-tree-list {
+      list-style: none;
+      width: 95%;
+      margin: 0px auto;
+      padding: 0px;
+      cursor: pointer;
+    }
+  }
+}
+
+.babe {
+  border: 1px solid $secondaryHoverBackground;
+}
+
+@media screen and (max-width: 768px) {
+  .list-view-container {
+    .list-container {
+      width: 100% !important;
+    }
+    .task-container {
+      display: none !important;
     }
   }
 }

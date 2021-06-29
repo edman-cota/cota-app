@@ -3,8 +3,6 @@ import firebase from "firebase/app";
 import "firebase/database";
 import { useAuth } from "../../../contexts/AuthContext";
 import { FormattedMessage } from "react-intl";
-
-// MATERIAL DESIGN UI
 import Tooltip from "@material-ui/core/Tooltip";
 
 const RenderStatus = (props) => {

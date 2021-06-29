@@ -3,6 +3,7 @@ import "./login.scss";
 import { Form, Alert } from "react-bootstrap";
 import { useAuth } from "../../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import LogoImg from "../../assets/logo.png";
 
 function Login() {
   const emailRef = useRef();
@@ -33,7 +34,7 @@ function Login() {
         <Link to="/">Cota</Link>
       </div>
       <div className="login-form-container">
-        <h2 className="text-center mb-4">Log In</h2>
+        <img src={LogoImg} alt="Logo" width="60" height="60" />
         <br />
         <br />
         {error && <Alert variant="danger">{error}</Alert>}
@@ -58,11 +59,18 @@ function Login() {
             Login
           </button>
         </Form>
-        <div className="w-100 text-center mt-2">
-          <br />
+        <div className="forgot-password">
           <Link to="/forgot-password" className="forgot-link">
             Forgot password ?
           </Link>
+        </div>
+        <div className="social-login">
+          <div className="social-login-title">Sign in with</div>
+          <ul>
+            <li>
+              <a href="#">Google</a>
+            </li>
+          </ul>
         </div>
         <div className="w-100 text-center mt-2">
           <br />

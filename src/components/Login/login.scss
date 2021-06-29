@@ -60,9 +60,66 @@
       }
     }
 
+    .forgot-password {
+      // background-color: green;
+      margin: 6px auto;
+    }
+
+    .social-login {
+      width: 300px;
+
+      .social-login-title {
+        color: rgba(0, 0, 0, 0.24);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0px;
+      }
+
+      ul {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+
+        li {
+          display: block;
+          border: 1px solid #f0f0f0;
+          border-radius: 20px;
+          padding: 8px;
+          box-sizing: border-box;
+
+          a {
+            height: 22px;
+            color: rgba(0, 0, 0, 0.54);
+          }
+        }
+      }
+    }
+
     .forgot-link {
       text-decoration: none;
       color: #617fde;
     }
+  }
+}
+
+@media screen and (max-width: 778px) {
+  .login-image-container {
+    display: none;
+  }
+
+  .login-form-container {
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .login-image-container {
+    display: none;
+  }
+  .login-form-container {
+    width: 100% !important;
   }
 }
