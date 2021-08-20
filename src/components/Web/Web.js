@@ -6,6 +6,7 @@ import Kanban from "../Kanban/Kanban";
 import Navbar from "../Navbar/Navbar";
 import Sidebar from "../Sidebar/Sidebar";
 import { FormattedMessage } from "react-intl";
+import Modal from "../Modal/Modal";
 
 // MATERIAL DESIGN UI
 import Tooltip from "@material-ui/core/Tooltip";
@@ -16,6 +17,7 @@ function Content() {
   return (
     <div className="main-web-container">
       <Sidebar />
+      <Modal show={true} />
       <div className="content-container">
         <Navbar></Navbar>
         <div className="switch-view-container">

@@ -13,81 +13,38 @@ import Task from "../Tree/Task";
 // MATERIAL DESIGN UI
 import Tooltip from "@material-ui/core/Tooltip";
 
-const Item = ({ name, updateOrder, updatePosition, ind }) => {
-  const [isdragged, setIsDragged] = React.useState(false);
+// const Item = ({ name, updateOrder, updatePosition, ind }) => {
+//   const [isdragged, setIsDragged] = React.useState(false);
 
-  const itemRef = useMeasurePosition((pos) => updatePosition(ind, pos));
+//   const itemRef = useMeasurePosition((pos) => updatePosition(ind, pos));
 
-  return (
-    <li className="tree-item">
-      <motion.div
-        className="tree-row"
-        style={{
-          zIndex: isdragged ? 2 : 1,
-          height: name.length * 10,
-        }}
-        dragConstraints={{
-          top: 0,
-          bottom: 0,
-        }}
-        dragElastic={1}
-        layout
-        ref={itemRef}
-        onDragStart={() => setIsDragged(true)}
-        onDragEnd={() => setIsDragged(false)}
-        animate={{
-          scale: isdragged ? 1.05 : 1,
-        }}
-        onViewportBoxUpdate={(_, delta) => {
-          isdragged && updateOrder(ind, delta.y.translate);
-        }}
-        drag="y"
-      >
-        <div className="tree-row-front">
-          <RenderStatus taskId={1} completed={0} />
-        </div>
-        <div className="tree-row-content">
-          <div className="task-menu-bar">
-            <Tooltip
-              title={<FormattedMessage id="tag"></FormattedMessage>}
-              placement="bottom"
-              arrow
-            >
-              <i className="uil uil-pricetag-alt"></i>
-            </Tooltip>
-            {name ? (
-              <RenderDate due={name} />
-            ) : (
-              <Tooltip
-                title={<FormattedMessage id="date"></FormattedMessage>}
-                placement="bottom"
-                arrow
-              >
-                <i className="uil uil-schedule"></i>
-              </Tooltip>
-            )}
-            <Priority taskId={1} priority={0} />
-          </div>
-          <div className="task-name-wrapper">
-            <div className="task-name-frame">
-              <div className="task-name-frame-border">
-                <span className="task-name">{name}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </li>
-  );
-};
-
-// const Item = (props) => {
-//   console.log("hoasdifasdf");
 //   return (
 //     <li className="tree-item">
-//       <div className="tree-row">
+//       <motion.div
+//         className="tree-row"
+//         style={{
+//           zIndex: isdragged ? 2 : 1,
+//           height: name.length * 10,
+//         }}
+//         dragConstraints={{
+//           top: 0,
+//           bottom: 0,
+//         }}
+//         dragElastic={1}
+//         layout
+//         ref={itemRef}
+//         onDragStart={() => setIsDragged(true)}
+//         onDragEnd={() => setIsDragged(false)}
+//         animate={{
+//           scale: isdragged ? 1.05 : 1,
+//         }}
+//         onViewportBoxUpdate={(_, delta) => {
+//           isdragged && updateOrder(ind, delta.y.translate);
+//         }}
+//         drag="y"
+//       >
 //         <div className="tree-row-front">
-//           <RenderStatus taskId={props.taskId} completed={props.completed} />
+//           <RenderStatus taskId={1} completed={0} />
 //         </div>
 //         <div className="tree-row-content">
 //           <div className="task-menu-bar">
@@ -98,8 +55,8 @@ const Item = ({ name, updateOrder, updatePosition, ind }) => {
 //             >
 //               <i className="uil uil-pricetag-alt"></i>
 //             </Tooltip>
-//             {props.dueDate ? (
-//               <RenderDate due={props.dueDate} />
+//             {name ? (
+//               <RenderDate due={name} />
 //             ) : (
 //               <Tooltip
 //                 title={<FormattedMessage id="date"></FormattedMessage>}
@@ -109,21 +66,66 @@ const Item = ({ name, updateOrder, updatePosition, ind }) => {
 //                 <i className="uil uil-schedule"></i>
 //               </Tooltip>
 //             )}
-
-//             <Priority taskId={props.taskId} priority={props.priority} />
+//             <Priority taskId={1} priority={0} />
 //           </div>
 //           <div className="task-name-wrapper">
 //             <div className="task-name-frame">
 //               <div className="task-name-frame-border">
-//                 <span className="task-name">{props.taskName}</span>
+//                 <span className="task-name">{name}</span>
 //               </div>
 //             </div>
 //           </div>
 //         </div>
-//       </div>
+//       </motion.div>
 //     </li>
 //   );
 // };
+
+const Item = (props) => {
+  return (
+    <li className="tree-item">
+      <div className="tree-row">
+        <div className="tree-row-front">
+          <RenderStatus taskId={props.taskId} completed={props.completed} />
+        </div>
+        <div className="tree-row-content">
+          <div className="task-menu-bar">
+            <Tooltip
+              title={<FormattedMessage id="tag"></FormattedMessage>}
+              placement="bottom"
+              arrow
+            >
+              <i className="uil uil-pricetag-alt"></i>
+            </Tooltip>
+            {props.dueDate ? (
+              <RenderDate due={props.dueDate} />
+            ) : (
+              <Tooltip
+                title={<FormattedMessage id="date"></FormattedMessage>}
+                placement="bottom"
+                arrow
+              >
+                <i className="uil uil-schedule"></i>
+              </Tooltip>
+            )}
+
+            <Priority taskId={props.taskId} priority={props.priority} />
+          </div>
+          <div
+            className="task-name-wrapper"
+            onClick={() => console.log(props.taskId)}
+          >
+            <div className="task-name-frame">
+              <div className="task-name-frame-border">
+                <span className="task-name">{props.taskName}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+};
 
 function RenderDate(props) {
   var todayDate = new Date().setHours(0, 0, 0, 0);

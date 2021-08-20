@@ -4,8 +4,13 @@ import moment from "moment";
 import { FormattedMessage } from "react-intl";
 import firebase from "firebase/app";
 import "firebase/database";
-import { useAuth } from "../../../contexts/AuthContext";
 import Priority from "../Priority/Priority";
+import { useAuth } from "../../../contexts/AuthContext";
+import { UilHistory } from "@iconscout/react-unicons";
+import { UilMinusPath } from "@iconscout/react-unicons";
+import { UilCopyAlt } from "@iconscout/react-unicons";
+import { UilShareAlt } from "@iconscout/react-unicons";
+import { UilTrash } from "@iconscout/react-unicons";
 
 // REACT BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
@@ -26,9 +31,16 @@ const Task = (props) => {
           // console.log(snap.val());
           taskList.push(snap.val());
         });
-        setCurrentTask({ currentTask: taskList });
+        setCurrentTask(taskList);
       });
   }, []);
+
+  const deleteTask = () => {
+    firebase
+      .database()
+      .ref(currentUser.uid + "/tasks/" + currentTaskId)
+      .remove();
+  };
 
   return (
     <div className="task-container">
@@ -43,29 +55,39 @@ const Task = (props) => {
           <ul>
             <li>
               <Dropdown>
-                <Dropdown.Toggle variant="link" id="task-dropdown-basic">
+                <Dropdown.Toggle variant="link" id="task-more-dropdown-button">
                   <i className="uil uil-ellipsis-h"></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">
-                    <i className="uil uil-share-alt"></i>
-                    <FormattedMessage id="share"></FormattedMessage>
+                  <Dropdown.Item>
+                    <UilShareAlt size="17" />
+                    <span>
+                      <FormattedMessage id="share"></FormattedMessage>
+                    </span>
                   </Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    <i className="uil uil-copy-alt"></i>
-                    <FormattedMessage id="duplicate_task"></FormattedMessage>
+                  <Dropdown.Item>
+                    <UilCopyAlt size="17" />
+                    <span>
+                      <FormattedMessage id="duplicate_task"></FormattedMessage>
+                    </span>
                   </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    <i className="uil uil-minus-path"></i>
-                    <FormattedMessage id="move_task"></FormattedMessage>
+                  <Dropdown.Item>
+                    <UilMinusPath size="17" />
+                    <span>
+                      <FormattedMessage id="move_task"></FormattedMessage>
+                    </span>
                   </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    <i className="uil uil-history"></i>
-                    <FormattedMessage id="task_activity"></FormattedMessage>
+                  <Dropdown.Item>
+                    <UilHistory size="17" />
+                    <span>
+                      <FormattedMessage id="task_activity"></FormattedMessage>
+                    </span>
                   </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    <i className="uil uil-trash-alt"></i>
-                    <FormattedMessage id="delete"></FormattedMessage>
+                  <Dropdown.Item onClick={() => deleteTask()}>
+                    <UilTrash size="17" />
+                    <span>
+                      <FormattedMessage id="delete"></FormattedMessage>
+                    </span>
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -73,14 +95,14 @@ const Task = (props) => {
           </ul>
         </div>
         <div className="task-name-container">
-          {/* <p>{currentTask.currentTask[1]}</p> */}
+          <p>{currentTask[1]}</p>
         </div>
         <div className="primary-options-container">
           <div className="complete-container"></div>
           <div className="calendar-container">
             <div className="calendar-frame">
               <i className="uil uil-schedule"></i>
-              {/* <RenderDate due={currentTask.currentTask[4]} /> */}
+              <RenderDate due={currentTask[4]} />
               {/* <p>
                 <FormattedMessage id="date_reminder"></FormattedMessage>
               </p> */}
@@ -88,10 +110,7 @@ const Task = (props) => {
           </div>
           <div className="priority-container">
             <div className="priority-frame">
-              {/* <Priority
-                taskId={currentTask.currentTask[5]}
-                priority={currentTask.currentTask[6]}
-              /> */}
+              <Priority taskId={currentTask[5]} priority={currentTask[6]} />
               <Dropdown>
                 <Dropdown.Toggle variant="link" id="priority-dropdown-basic">
                   <i className="uil uil-arrow-up"></i>

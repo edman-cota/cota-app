@@ -8,7 +8,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 const RenderStatus = (props) => {
   const { currentUser } = useAuth();
   const switchTaskStatus = (prop) => {
-    console.log(prop);
     firebase
       .database()
       .ref(currentUser.uid + "/tasks")

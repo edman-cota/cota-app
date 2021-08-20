@@ -6,7 +6,7 @@ import RenderStatus from "./RenderStatus";
 
 const ItemCompleted = (props) => {
   return (
-    <li className="tree-item">
+    <li className="tree-item-completed">
       <div className="tree-row">
         <div className="tree-row-front">
           <RenderStatus taskId={props.taskId} completed={props.completed} />

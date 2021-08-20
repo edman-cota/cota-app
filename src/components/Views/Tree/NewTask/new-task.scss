@@ -22,7 +22,7 @@
       height: 36px;
       //   border: 1px solid $secondaryBorderColor;
       border: none !important;
-      border-radius: 6px;
+      border-radius: 6px 0px 0px 6px;
       padding-left: 12px;
       font-size: 15px;
 
@@ -30,6 +30,13 @@
         // border: 1px solid $secondaryBorderColor !important;
         outline: none;
       }
+    }
+
+    .dropdown {
+      height: 36px !important;
+      background-color: white;
+      align-items: center;
+      display: flex;
     }
 
     .uil-calender {
@@ -40,14 +47,26 @@
       color: rgba(0, 0, 0, 0.42) !important;
       font-size: 16px;
     }
+    .priority-3 {
+      color: $highPriorityColor !important;
+      font-size: 16px;
+    }
+    .priority-2 {
+      color: $mediumPriorityColor !important;
+      font-size: 16px;
+    }
+    .priority-1 {
+      color: $lowPriorityColor !important;
+      font-size: 16px;
+    }
 
     #new-date-dropdown-button {
       //   background-color: #ededed;
-      background-color: #f7f7f9;
+      // background-color: #f7f7f9;
       outline: none !important;
       border: none !important;
       box-shadow: none !important;
-      height: 30px;
+      height: 36px !important;
       padding: 6px 6px;
       display: flex;
       justify-content: center;
@@ -72,7 +91,7 @@
 
     #add-priority-dropdown-button {
       //   background-color: #ededed;
-      background-color: #f7f7f9;
+      //   background-color: #f7f7f9;
       outline: none !important;
       border: none !important;
       box-shadow: none !important;
@@ -98,9 +117,74 @@
         box-shadow: none !important;
       }
     }
+    .priority-low {
+      visibility: visible !important;
+      cursor: pointer;
+      padding: 4px 8px;
+      width: 40px;
+      line-height: 24px;
+      text-align: center;
+      overflow: hidden;
+      box-sizing: border-box;
+      height: 30px;
+      word-break: break-all;
+      font-style: normal;
+      margin-left: 4px;
+      font-size: 16px;
+      color: $lowPriorityColor !important;
+
+      &:hover {
+        color: $lowPriorityColor !important;
+      }
+    }
+    .priority-medium {
+      visibility: visible !important;
+      cursor: pointer;
+      padding: 4px 8px;
+      width: 40px;
+      line-height: 24px;
+      text-align: center;
+      overflow: hidden;
+      box-sizing: border-box;
+      height: 30px;
+      word-break: break-all;
+      font-style: normal;
+      margin-left: 4px;
+      font-size: 16px;
+      color: $mediumPriorityColor !important;
+
+      &:hover {
+        color: $mediumPriorityColor !important;
+      }
+    }
+    .priority-high {
+      visibility: visible !important;
+      cursor: pointer;
+      padding: 4px 8px;
+      width: 40px;
+      line-height: 24px;
+      text-align: center;
+      overflow: hidden;
+      box-sizing: border-box;
+      height: 30px;
+      word-break: break-all;
+      font-style: normal;
+      margin-left: 4px;
+      font-size: 16px;
+      color: $highPriorityColor !important;
+
+      &:hover {
+        color: $highPriorityColor !important;
+      }
+    }
   }
 }
 
 .add-task-item {
   visibility: hidden !important;
+
+  form {
+    visibility: hidden !important;
+    display: none;
+  }
 }

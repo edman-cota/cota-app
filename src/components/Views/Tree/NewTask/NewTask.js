@@ -11,6 +11,7 @@ import { useAuth } from "../../../../contexts/AuthContext";
 function NewTask(props) {
   const { currentUser } = useAuth();
 
+  const [priority, setPriority] = useState(0);
   const [taskState, setTaskState] = useState({ task: "" });
   const [userState, setUserState] = useState({
     task: "",
@@ -39,12 +40,13 @@ function NewTask(props) {
       date_completed: "",
       due: "",
       id: newTaskRef.key,
-      priority: 0,
+      priority: priority,
       project_id: "-MYDQJhtTY-2sQLqDUhh",
       user_id: "2ZX9urSBNmY5BWAtyrBVK1q92iz1",
     });
 
     setUserState({ task: "" });
+    setPriority(0);
   }
 
   const handleChange = (event) => {
@@ -98,24 +100,25 @@ function NewTask(props) {
 
         <Dropdown>
           <Dropdown.Toggle variant="link" id="add-priority-dropdown-button">
-            <i className="uil uil-arrow-up"></i>
+            <i className={`uil uil-arrow-up priority-${priority}`}></i>
           </Dropdown.Toggle>
+
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">
-              <i className="uil uil-align-center-alt"></i>
-              <FormattedMessage id="custom"></FormattedMessage>
+            <Dropdown.Item onClick={() => setPriority(3)}>
+              <i className="uil uil-arrow-up priority-high"></i>
+              <FormattedMessage id="high"></FormattedMessage>
             </Dropdown.Item>
-            <Dropdown.Item href="#/action-2">
+            <Dropdown.Item onClick={() => setPriority(2)}>
+              <i className="uil uil-arrow-up priority-medium"></i>
+              <FormattedMessage id="medium"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setPriority(1)}>
+              <i className="uil uil-arrow-up priority-low"></i>
+              <FormattedMessage id="low"></FormattedMessage>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setPriority(0)}>
               <i className="uil uil-arrow-up"></i>
-              <FormattedMessage id="priority"></FormattedMessage>
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3">
-              <i className="uil uil-calender"></i>
-              <FormattedMessage id="date"></FormattedMessage>
-            </Dropdown.Item>
-            <Dropdown.Item href="#/action-3">
-              <i className="uil uil-font"></i>
-              <FormattedMessage id="title"></FormattedMessage>
+              <FormattedMessage id="none"></FormattedMessage>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

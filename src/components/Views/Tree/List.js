@@ -13,17 +13,17 @@ import Task from "./Task";
 import NewTask from "./NewTask/NewTask";
 import Item from "../Item/Item";
 import ItemCompleted from "../Item/ItemCompleted";
+import Modal from "../../Modal/Modal";
 
 // REACT BOOTSTRAP
 import Dropdown from "react-bootstrap/Dropdown";
-import { green } from "@material-ui/core/colors";
 
-const Lista = [
-  "Get current profile picture",
-  "Improve UI Design",
-  "Re-design add task input",
-  "Item Five",
-];
+// const Lista = [
+//   "Get current profile picture",
+//   "Improve UI Design",
+//   "Re-design add task input",
+//   "Item Five",
+// ];
 
 function List() {
   const { currentUser } = useAuth();
@@ -34,24 +34,24 @@ function List() {
   const [showAddTask, setShowAddTask] = useState(false);
   const [filter, setFilter] = useState(0);
 
-  const [updatedList, updatePosition, updateOrder] = usePositionReorder(Lista);
+  // const [updatedList, updatePosition, updateOrder] = usePositionReorder(Lista);
 
   // RETRIEVE PROJECT
-  // useEffect(() => {
-  //   firebase
-  //     .database()
-  //     .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/Projects")
-  //     .on("value", (snapshot) => {
-  //       let projectList = [];
-  //       snapshot.forEach((snap) => {
-  //         if (snap.val().name === "Inbox") {
-  //           projectList.push(snap.val());
-  //           setProjectsList({ projectsList: projectList });
-  //           setShowCompleted({ showCompleted: snap.val().show_completed });
-  //         }
-  //       });
-  //     });
-  // }, []);
+  useEffect(() => {
+    firebase
+      .database()
+      .ref("2ZX9urSBNmY5BWAtyrBVK1q92iz1/Projects")
+      .on("value", (snapshot) => {
+        let projectList = [];
+        snapshot.forEach((snap) => {
+          if (snap.val().name === "Inbox") {
+            projectList.push(snap.val());
+            setProjectsList(projectList);
+            setShowCompleted(snap.val().show_completed);
+          }
+        });
+      });
+  }, []);
 
   useEffect(() => {
     // RETRIEVE TASKS
@@ -71,17 +71,13 @@ function List() {
           }
         });
 
-        taskList.map((data) => {
-          console.log(data.content);
-        });
-
-        setTasksList({ tasksList: taskList });
-
-        console.log(Object.entries(tasksList));
-
-        setCompletedTasks({ completedTasks: completedTask });
+        setTasksList(taskList);
+        setCompletedTasks(completedTask);
       });
   }, []);
+
+  const [updatedList, updatePosition, updateOrder] =
+    usePositionReorder(tasksList);
 
   function hideShowCompleted(props) {
     firebase
@@ -140,14 +136,13 @@ function List() {
               </Dropdown>
             </div>
           </div>
-          {/* {projectsList.map((data) => {
+          {projectsList.map((data) => {
             return (
               <div className="project-title-center">
-                <h4>{data.name}</h4>
+                {/* <h4>{data.name}</h4> */}
               </div>
             );
-          })} */}
-          <div className="project-title-center">{/* <h4>Inbox</h4> */}</div>
+          })}
 
           <div className="project-title-last">
             <div className="project-title-more-frame">
@@ -157,7 +152,7 @@ function List() {
               >
                 <i className="uil uil-plus"></i>
               </button>
-              <Dropdown>
+              {/* <Dropdown>
                 <Dropdown.Toggle variant="link" id="more-dropdown-button">
                   <i className="uil uil-ellipsis-h"></i>
                 </Dropdown.Toggle>
@@ -188,38 +183,12 @@ function List() {
                     );
                   })}
                 </Dropdown.Menu>
-              </Dropdown>
+              </Dropdown> */}
             </div>
           </div>
         </div>
         <ul className="tree-list">
-          {/* {objectArray.forEach((item) => {
-            // console.log(item);
-            item.forEach((esto) => {
-              // console.log(esto);
-
-              for (var arena in esto) {
-                // console.log(arena[1]);
-              }
-            });
-          })} */}
-          {/* {Object.entries(tasksList).map((item) => {
-            console.log(item);
-            item.map((data) => {
-              console.log(data.id);
-              return (
-                <Item
-                  key={data.id}
-                  taskId={data.id}
-                  completed={data.completed}
-                  taskName={data.content}
-                  dueDate={data.due}
-                  priority={data.priority}
-                />
-              );
-            });
-          })} */}
-          {updatedList.map((name, index) => (
+          {/* {updatedList.map((name, index) => (
             <Item
               key={name}
               ind={index}
@@ -227,8 +196,8 @@ function List() {
               updatePosition={updatePosition}
               name={name}
             />
-          ))}
-          {/* {tasksList.map((data) => {
+          ))} */}
+          {tasksList.map((data) => {
             return (
               <Item
                 key={data.id}
@@ -239,7 +208,17 @@ function List() {
                 priority={data.priority}
               />
             );
-          })} */}
+          })}
+          {/* {updatedList.map(
+            (name, index) => console.log(updatedList)
+            <Item
+              key={name}
+              ind={index}
+              updateOrder={updateOrder}
+              updatePosition={updatePosition}
+              name={name}
+            />
+          )} */}
 
           <NewTask showAddTask={showAddTask} />
         </ul>
@@ -250,7 +229,7 @@ function List() {
           ""
         )}
         <ul className="completed-tree-list">
-          {/* {completedTasks.map((data) => {
+          {completedTasks.map((data) => {
             if (showCompleted) {
               return (
                 <ItemCompleted
@@ -262,10 +241,11 @@ function List() {
                 />
               );
             }
-          })} */}
+          })}
         </ul>
       </div>
       <Task />
+      <Modal show={true} />
     </div>
   );
 }

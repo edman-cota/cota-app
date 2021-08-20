@@ -1,0 +1,291 @@
+.tree-item {
+  position: relative;
+  padding-top: 38px !important;
+
+  //   &:hover {
+  //     border: none !important;
+  //   }
+
+  .tree-row {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 39px !important;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+    // border: 1px solid #f8f8f8;
+    // border: 1px solid $secondaryHoverBackground;
+    // border-width: 1px 0;
+
+    &:hover {
+      background-color: $secondaryHoverBackground;
+
+      .uil-pricetag-alt {
+        visibility: visible !important;
+      }
+      .uil-schedule {
+        visibility: visible !important;
+      }
+      .uil-arrow-up {
+        visibility: visible !important;
+      }
+    }
+
+    .tree-row-front {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px 10px;
+
+      .uil-circle {
+        padding: 0px 4px;
+        font-size: 21px;
+        color: $nonePriorityColor;
+
+        &:hover {
+          color: green;
+        }
+      }
+      .uil-check-circle {
+        padding: 0px 4px;
+        font-size: 21px;
+        color: green;
+
+        &:hover {
+          color: green;
+        }
+      }
+    }
+    .tree-row-content {
+      overflow: hidden;
+      flex: 1;
+      align-items: center;
+
+      .task-menu-bar {
+        display: flex;
+        height: 100%;
+        cursor: pointer;
+        padding-top: 1px;
+        white-space: nowrap;
+        float: right !important;
+        justify-content: center;
+        align-items: center;
+
+        .uil-pricetag-alt {
+          visibility: hidden;
+          padding: 4px 5px;
+          width: 42px;
+          line-height: 22px;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          color: rgba(0, 0, 0, 0.42);
+
+          &:hover {
+            color: green;
+          }
+        }
+
+        .uil-schedule {
+          visibility: hidden;
+          padding: 4px 5px;
+          width: 86px !important;
+          line-height: 22px;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          color: rgba(0, 0, 0, 0.42);
+
+          &:hover {
+            color: green;
+          }
+        }
+
+        .uil-schedule-text {
+          padding: 4px 5px;
+          width: 86px !important;
+          line-height: 22px;
+          text-align: center;
+          overflow: hidden;
+          font-size: 13px;
+          text-transform: none;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          color: rgba(0, 0, 0, 0.42);
+        }
+
+        .uil-schedule-text-today {
+          padding: 4px 5px;
+          width: 86px !important;
+          line-height: 22px;
+          text-align: center;
+          overflow: hidden;
+          font-size: 13px;
+          text-transform: none;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          color: $lowPriorityColor;
+        }
+
+        .uil-schedule-text-yesterday {
+          padding: 4px 5px;
+          width: 86px !important;
+          line-height: 22px;
+          text-align: center;
+          overflow: hidden;
+          font-size: 13px;
+          text-transform: none;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          color: $highPriorityColor;
+        }
+
+        .uil-schedule-text-tomorrow {
+          padding: 4px 5px;
+          width: 86px !important;
+          line-height: 22px;
+          text-align: center;
+          overflow: hidden;
+          font-size: 13px;
+          text-transform: none;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          color: $tomorrowColor;
+        }
+
+        .uil-arrow-up {
+          visibility: hidden;
+          cursor: pointer;
+          padding: 4px 8px;
+          width: 40px;
+          line-height: 24px;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          font-style: normal;
+          margin-left: 4px;
+          font-size: 16px;
+          color: rgba(0, 0, 0, 0.42);
+
+          &:hover {
+            color: green;
+          }
+        }
+        .priority-low {
+          visibility: visible !important;
+          cursor: pointer;
+          padding: 4px 8px;
+          width: 40px;
+          line-height: 24px;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          font-style: normal;
+          margin-left: 4px;
+          font-size: 16px;
+          color: $lowPriorityColor;
+
+          &:hover {
+            color: $lowPriorityColor !important;
+          }
+        }
+        .priority-medium {
+          visibility: visible !important;
+          cursor: pointer;
+          padding: 4px 8px;
+          width: 40px;
+          line-height: 24px;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          font-style: normal;
+          margin-left: 4px;
+          font-size: 16px;
+          color: $mediumPriorityColor;
+
+          &:hover {
+            color: $mediumPriorityColor !important;
+          }
+        }
+        .priority-high {
+          visibility: visible !important;
+          cursor: pointer;
+          padding: 4px 8px;
+          width: 40px;
+          line-height: 24px;
+          text-align: center;
+          overflow: hidden;
+          box-sizing: border-box;
+          height: 30px;
+          word-break: break-all;
+          font-style: normal;
+          margin-left: 4px;
+          font-size: 16px;
+          color: $highPriorityColor;
+
+          &:hover {
+            color: $highPriorityColor !important;
+          }
+        }
+      }
+
+      .task-name-wrapper {
+        padding: 2px 0px;
+        height: 100%;
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+
+        .task-name-frame {
+          padding: 0px 10px 0px 5px;
+          display: inline-block;
+          position: relative;
+          width: 100%;
+          color: rgba(0, 0, 0, 0.9);
+          // max-width: 100%;
+          // min-width: 32px;
+          height: 100%;
+          border: 1px solid transparent;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          line-height: 27px;
+
+          .task-name-frame-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 1px solid transparent;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+
+            .task-name {
+              //   line-height: 24px;
+              color: rgba(0, 0, 0, 0.9);
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
